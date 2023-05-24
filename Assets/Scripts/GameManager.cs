@@ -25,4 +25,9 @@ public class GameManager : MonoBehaviour
         player.SubtractLife();
         _playerDead = false;
     }
+
+    public void IncreaseScore(int amount)
+    {
+        playerScore += amount;
+    }
 }
