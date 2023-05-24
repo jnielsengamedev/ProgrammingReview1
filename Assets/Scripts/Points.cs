@@ -7,5 +7,6 @@ public class Points : Pickup
     protected override void Activate(GameManager gameManager, Player player)
     {
         gameManager.IncreaseScore(scoreAmount);
+        DestroyPickup();
     }
 }

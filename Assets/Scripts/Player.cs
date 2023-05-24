@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class Player : MonoBehaviour
     private bool _canMove = true;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
+    internal bool IsPowered;
 
     private void Awake()
     {
@@ -57,5 +60,12 @@ public class Player : MonoBehaviour
     private static Vector3 GetRandomPosition()
     {
         return new Vector3(Random.Range(-8,8), Random.Range(-5,5), 0);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!IsPowered) return;
+        if (!other.collider.CompareTag("Enemy")) return;
+        Destroy(other.gameObject);
     }
 }

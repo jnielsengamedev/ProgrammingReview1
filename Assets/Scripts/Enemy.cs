@@ -5,7 +5,8 @@ public class Enemy : MonoBehaviour
 {
     private Player _player;
     private GameManager _gameManager;
-    
+    internal bool CanKill = true;
+
     private void Awake()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -28,9 +29,8 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Player"))
-        {
-            _gameManager.SubtractLife();
-        }
+        if (!CanKill) return;
+        if (!other.collider.CompareTag("Player")) return;
+        _gameManager.SubtractLife();
     }
 }
