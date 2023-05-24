@@ -1,18 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class Pickup : MonoBehaviour
 {
-    protected Collider2D Collider;
-    protected SpriteRenderer SpriteRenderer;
+    private Collider2D _collider;
+    private SpriteRenderer _spriteRenderer;
     private GameManager _gameManager;
 
     private void Awake()
     {
-        Collider = GetComponent<Collider2D>();
-        SpriteRenderer = GetComponent<SpriteRenderer>();
+        _collider = GetComponent<Collider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
@@ -20,9 +21,14 @@ public abstract class Pickup : MonoBehaviour
 
     protected void DestroyPickup()
     {
-        Collider.enabled = false;
-        SpriteRenderer.enabled = false;
+        MakeInvisible();
         Destroy(gameObject);
+    }
+
+    protected void MakeInvisible()
+    {
+        _collider.enabled = false;
+        _spriteRenderer.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

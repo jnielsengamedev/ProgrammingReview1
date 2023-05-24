@@ -19,8 +19,7 @@ public class Power : Pickup
             enemy.CanKill = false;
         }
 
-        SpriteRenderer.enabled = false;
-        Collider.enabled = false;
+        MakeInvisible();
         StartCoroutine(PoweredUpCoroutine(player, player.GetComponent<SpriteRenderer>(), enemies));
     }
 

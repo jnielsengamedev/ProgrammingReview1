@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -6,6 +5,7 @@ public class Enemy : MonoBehaviour
     private Player _player;
     private GameManager _gameManager;
     internal bool CanKill = true;
+    internal bool CanMove = true;
 
     private void Awake()
     {
@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (!CanMove) return;
         LookAt(_player.transform.position);
         transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, Time.deltaTime);
     }
